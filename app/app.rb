@@ -1,11 +1,15 @@
 ENV['RACK_ENV'] ||= 'development'
 require 'sinatra/base'
-require './app/models/link'
-require './app/models/tag'
 require_relative 'data_mapper_setup'
 
 class BookmarkManager < Sinatra::Base
   enable :sessions
+
+  helpers do
+    def current_user
+      @current_user ||= User.first(email: session[:email])
+    end
+  end
 
   get '/' do
     erb :index
@@ -45,8 +49,18 @@ class BookmarkManager < Sinatra::Base
     @linktags = LinkTag.all
     @filter = session[:filter]
     erb :filter
-
   end
+
+  get '/users/new' do
+    erb :signup
+  end
+
+  post '/users' do
+    User.create(email: params[:email], password: params[:password])
+    session[:email] = params[:email]
+    redirect to('/links')
+  end
+
 
 
   # start the server if ruby file executed directly

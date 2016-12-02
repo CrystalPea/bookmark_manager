@@ -1,12 +1,7 @@
-<HTML>
-  <head>
-  </head>
-  <body>
+<%if current_user%>"Welcome to your bookmark manager, <%=current_user.email%>"<%end%>
 <ul id="links"><%@links.each {|link|
 %>
 <li>
 Title: <%= link.title %>
 URL: <%= link.url %>
 <% }%></ul>
-
-</body>
