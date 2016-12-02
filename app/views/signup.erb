@@ -1,7 +1,16 @@
-Please sign up:
-<form action='/users' method='post'>
-  E-mail: <input type='text' name='email' value='<%=@email%>'>
-  Password: <input type='password' name='password'>
-  Confirm Password: <input type='password' name='password_confirmation'>
-  <input type='submit' value='Submit'>
-</form>
+<head>
+  <style>
+    #email:invalid {border: 2px solid red;}
+    #email:valid {border: 2px solid green;}
+  </style>
+</head>
+
+<body>
+  Please sign up:
+  <form action='/users' method='post'>
+    E-mail: <input id="email" type='text' name='email' value='<%=@email%>' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+    Password: <input type='password' name='password'>
+    Confirm Password: <input type='password' name='password_confirmation'>
+    <input type='submit' value='Submit'>
+  </form>
+</body>
