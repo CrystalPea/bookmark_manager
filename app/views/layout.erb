@@ -6,6 +6,11 @@
 
   <body>
     <%if current_user%>"Welcome to your bookmark manager, <%=current_user.email%>"<%end%>
+
+    <% if flash[:mismatch] %>
+      <div id='notice'><%= flash[:mismatch] %></div>
+    <% end %>
     <%= yield %>
+
   </body>
 </html>

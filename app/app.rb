@@ -1,10 +1,12 @@
 ENV['RACK_ENV'] ||= 'development'
 require 'sinatra/base'
 require_relative 'data_mapper_setup'
+require 'sinatra/flash'
 
 class BookmarkManager < Sinatra::Base
   enable :sessions
   set :session_secret, "himitsu"
+  register Sinatra::Flash
 
   helpers do
     def current_user
@@ -53,7 +55,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   get '/users/new' do
-    @mismatch = session[:mismatch]
+    @email = session[:email]
     erb :signup
   end
 
@@ -63,7 +65,7 @@ class BookmarkManager < Sinatra::Base
     if new_user.save
       redirect to('/links')
     else
-      session[:mismatch] = true
+      flash[:mismatch] = "Passwords don't match"
       redirect to('/users/new')
     end
   end
