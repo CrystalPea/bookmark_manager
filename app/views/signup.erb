@@ -1,6 +1,12 @@
+<% if @mismatch %>
+  <h3> Passwords don't match </h3>
+<% end %>
+
+
 Please sign up:
 <form action='/users' method='post'>
   E-mail: <input type='text' name='email'>
-  Password: <input type='text' name='password'>
+  Password: <input type='password' name='password'>
+  Confirm Password: <input type='password' name='password_confirmation'>
   <input type='submit' value='Submit'>
 </form>

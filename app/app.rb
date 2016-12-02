@@ -53,13 +53,19 @@ class BookmarkManager < Sinatra::Base
   end
 
   get '/users/new' do
+    @mismatch = session[:mismatch]
     erb :signup
   end
 
   post '/users' do
-    User.create(email: params[:email], password: params[:password])
+    new_user = User.create(email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
     session[:email] = params[:email]
-    redirect to('/links')
+    if new_user.save
+      redirect to('/links')
+    else
+      session[:mismatch] = true
+      redirect to('/users/new')
+    end
   end
 
 

@@ -4,9 +4,8 @@ RSpec.feature "Signing up", :type => :feature do
   scenario "user creates an account" do
     DatabaseCleaner.clean
     user_count = User.all.count
-    visit '/users/new'
-    fill_in('email', with: 'doodle@diddle.do')
-    fill_in('password', with: 'bamboozlediddledoodledoo')
+    signup
+    fill_in('password_confirmation', with: 'bamboozlediddledoodledoo')
     click_button('Submit')
     expect(current_path).to eq '/links'
     message = "Welcome to your bookmark manager, doodle@diddle.do"

@@ -15,3 +15,9 @@ def create_bubbles
   fill_in('tag', with: 'bubbles')
   click_button('Submit')
 end
+
+def signup
+  visit '/users/new'
+  fill_in('email', with: 'doodle@diddle.do')
+  fill_in('password', with: 'bamboozlediddledoodledoo')
+end
