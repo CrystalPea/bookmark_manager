@@ -7,7 +7,7 @@ RSpec.feature "Viewing links", :type => :feature do
     visit '/links'
     expect(page.status_code).to eq 200
 
-    within 'ul#linktags' do
+    within 'ul#links' do
       message = "Bookface"
       expect(page).to have_content(message)
     end
